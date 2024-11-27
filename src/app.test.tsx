@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import App from "./App";
 
 const sum = (x: number, y: number) => {
@@ -15,4 +15,18 @@ describe("App component", () => {
 
     screen.getByText("Hello world!"); // this will fail as the text is not present on the
   });
+
+  it("Should change message on button click", () => {
+    render(<App />);
+
+    screen.getByText("lets learn more about testing in React");
+
+    const button = screen.getByText(/Change message/i);
+
+    fireEvent.click(button);
+
+    screen.getByText(/new message/i);
+  });
 });
+
+export default {};
